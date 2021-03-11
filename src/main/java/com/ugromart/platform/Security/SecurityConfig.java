@@ -1,6 +1,7 @@
 package com.ugromart.platform.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,9 +20,15 @@ import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import static java.lang.String.format;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Value("${springdoc.api-docs.path}")
+    private String restApiDocPath;
+    @Value("${springdoc.swagger-ui.path}")
+    private String swaggerPath;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -55,11 +62,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //set permissions on endpints
 
         http.authorizeRequests()
-                //publicly accessible endpoints
+                //swagger end points must be publicly accessible
                 .antMatchers(HttpMethod.GET,"/").permitAll()
+                .antMatchers(format("%s/**",restApiDocPath)).permitAll()
+                .antMatchers(format("%s/**",swaggerPath)).permitAll()
+                //publicly accessible endpoints
                 .antMatchers(HttpMethod.GET,"/resources/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/user/register").permitAll()
-                .antMatchers(HttpMethod.POST,"/user/login").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user/register").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/user/login").permitAll()
                 //private endpoints
                 .anyRequest().authenticated()
              .and();
