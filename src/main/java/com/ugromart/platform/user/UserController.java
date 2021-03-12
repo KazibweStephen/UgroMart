@@ -2,7 +2,10 @@ package com.ugromart.platform.user;
 
 
 import com.ugromart.platform.Security.JwtTokenUtil;
+import com.ugromart.platform.user.models.Auth;
 import com.ugromart.platform.user.models.User;
+import com.ugromart.platform.user.models.UserCreateResponse;
+import com.ugromart.platform.user.models.UserLogin;
 import com.ugromart.platform.user.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpHeaders;
@@ -38,19 +41,21 @@ public class UserController {
     //private UserViewMapper userViewMapper;
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user){
+    public ResponseEntity<UserCreateResponse> register(@RequestBody User user){
         userService.save(user);
-        return  ResponseEntity.ok().body(user);
+        User result =userService.findByUsername(user.getUsername());
+        return  ResponseEntity.ok().body(new UserCreateResponse(result.getUsername(),result.getId()));
     }
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody @Valid User user){
+    public ResponseEntity<Auth> login(@RequestBody @Valid UserLogin user){
         try{
             Authentication authentication =authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),
                     user.getPassword()));
             org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User)authentication.getPrincipal();
-
+            String token=jwtTokenUtil.generateAccessToken(principal);
+            Auth auth=new Auth(0,principal.getUsername(),token);
             return  ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION,jwtTokenUtil.generateAccessToken(principal)).body(user);
+                    .header(HttpHeaders.AUTHORIZATION,token).body(auth);
         }catch (BadCredentialsException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
