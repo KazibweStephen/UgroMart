@@ -2,6 +2,7 @@ package com.ugromart.platform.user;
 
 
 import com.ugromart.platform.Security.JwtTokenUtil;
+import com.ugromart.platform.configuration.NotFoundException;
 import com.ugromart.platform.user.models.Auth;
 import com.ugromart.platform.user.models.User;
 import com.ugromart.platform.user.models.UserCreateResponse;
@@ -58,6 +59,8 @@ public class UserController {
                     .header(HttpHeaders.AUTHORIZATION,token).body(auth);
         }catch (BadCredentialsException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }catch (NotFoundException ex){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
     @GetMapping("/")
