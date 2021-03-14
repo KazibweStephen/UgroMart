@@ -8,7 +8,10 @@ public class Auth {
     private String token;
     private String username;
 
-    public Auth(int userId,String username, String token) {
+    public Auth() {
+    }
+
+    public Auth(int userId, String username, String token) {
         this.userId = userId;
         this.username=username;
         this.token = token;

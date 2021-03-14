@@ -1,9 +1,7 @@
 package com.ugromart.platform.order;
 
-import com.ugromart.platform.product.Product;
-import lombok.Data;
+import com.ugromart.platform.product.models.Product;
 
-import java.util.Date;
 import java.util.List;
 
 

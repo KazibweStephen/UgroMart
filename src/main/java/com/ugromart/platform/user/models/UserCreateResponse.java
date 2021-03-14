@@ -5,6 +5,9 @@ public class UserCreateResponse {
     private String username;
     private long userId;
 
+    public UserCreateResponse() {
+    }
+
     public UserCreateResponse(String username, long userId) {
         this.username = username;
         this.userId = userId;
