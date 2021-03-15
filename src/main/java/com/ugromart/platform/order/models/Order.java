@@ -1,5 +1,6 @@
-package com.ugromart.platform.order;
+package com.ugromart.platform.order.models;
 
+import com.ugromart.platform.order.models.Money;
 import com.ugromart.platform.product.models.Product;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class Order {
     private String orderDate;
     private Money totalOrder;
     private  String status;
-    private List<Product> orderItems;
+    private List<OrderItem> orderItems;
 
     public long getOrderId() {
         return orderId;
@@ -53,11 +54,11 @@ public class Order {
         this.status = status;
     }
 
-    public List<Product> getOrderItems() {
+    public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<Product> orderItems) {
+    public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 }

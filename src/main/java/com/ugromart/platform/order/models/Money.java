@@ -1,4 +1,4 @@
-package com.ugromart.platform.order;
+package com.ugromart.platform.order.models;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

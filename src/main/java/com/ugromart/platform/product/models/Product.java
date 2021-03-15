@@ -1,7 +1,5 @@
 package com.ugromart.platform.product.models;
 
-import com.ugromart.platform.order.Money;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;

@@ -14,13 +14,18 @@ public class ProductsRestService {
     @Autowired
     ProductsRestConnector productsRestConnector;
 
-    public List<Product> getProduts(){
+    public List<Product> getProducts(){
         Product[] products=productsRestConnector.get(Product[].class,"/products");
         return Arrays.asList(products);
+    }
+    public Product getProductById(int id){
+        Product product=productsRestConnector.get(Product.class,"/products/"+id);
+        return product;
     }
 
     public List<Vendor> getVendors() {
         Vendor[] vendors =productsRestConnector.get(Vendor[].class,"/vendors");
         return Arrays.asList(vendors);
     }
+
 }

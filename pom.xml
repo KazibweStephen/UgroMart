@@ -58,13 +58,6 @@
 			<artifactId>spring-rabbit-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-stream</artifactId>-->
-<!--			<scope>test</scope>-->
-<!--			<classifier>test-binder</classifier>-->
-<!--			<type>test-jar</type>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>

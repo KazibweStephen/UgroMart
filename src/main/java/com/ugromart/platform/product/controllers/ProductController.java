@@ -20,7 +20,7 @@ public class ProductController {
 
     @GetMapping("/")
     public List<Product> getProducts(){
-        return productsRestService.getProduts();
+        return productsRestService.getProducts();
     }
 
     @GetMapping("/vendors")
