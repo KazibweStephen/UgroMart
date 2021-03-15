@@ -1,21 +1,17 @@
-package com.ugromart.platform.product.services;
+package com.ugromart.platform.order.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-
 @Component
-public class ProductsRestConnector {
-
-    @Value("${service.productsms.url}")
+public class OrdersRestConnector {
+    @Value("${service.ordersms.url}")
     private String url;
     private RestTemplate restTemplate;
 
 
-    public ProductsRestConnector(){
+    public OrdersRestConnector(){
         this.restTemplate=new RestTemplate();
     }
 
@@ -23,5 +19,4 @@ public class ProductsRestConnector {
 
         return restTemplate.getForObject(url+endPoint,responseType);
     }
-
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface OrderProcessor {
-    String ORDERS_IN="orders_created";
+    String ORDERS_IN="orders_in";
 
     @Output(ORDERS_IN)
     MessageChannel sourceOfOrders();

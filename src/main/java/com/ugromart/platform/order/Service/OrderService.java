@@ -18,6 +18,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -31,6 +32,8 @@ public class OrderService {
     @Autowired
     private ProductsRestService productsRestService;
 
+    @Autowired
+    private OrdersRestService ordersRestService;
     @Autowired
     public OrderService(OrderProcessor orderProcessor){
         this.orderProcessor=orderProcessor;
@@ -68,4 +71,7 @@ public class OrderService {
     private static final <T> Message<T> message(T val){ return MessageBuilder.withPayload(val).build();
     }
 
+    public List<Order> getCustomerOrders(long customerId) {
+        return ordersRestService.getOrdersByCustomerId(customerId);
+    }
 }
